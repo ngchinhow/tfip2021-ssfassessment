@@ -29,6 +29,6 @@ public class SearchController {
         List<Book> books = service.search(query);
         model.addAttribute("query", query);
         model.addAttribute("books", books);
-        return "search_result";
+        return "search";
     }
 }

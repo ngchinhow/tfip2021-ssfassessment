@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import jakarta.json.JsonObject;
 
 public class Book {
-    private String key;
+    private String olid;
     private String title;
     private String description;
     private List<String> excerpts;
@@ -17,14 +17,14 @@ public class Book {
     
     public Book() { }
 
-    public Book(String key, String title, String webpageUrl) {
-        this.key = key;
+    public Book(String olid, String title, String webpageUrl) {
+        this.olid = olid;
         this.title = title;
         this.webpageUrl = webpageUrl;
     }
 
-    public String getKey() { return key; }
-    public void setKey(String key) { this.key = key; }
+    public String getOlid() { return olid; }
+    public void setOlid(String olid) { this.olid = olid; }
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
@@ -47,7 +47,7 @@ public class Book {
     public void setCached(boolean cached) { this.cached = cached; }
 
     public void buildFromJson(JsonObject o) {
-        this.setKey(o.getString("key"));
+        this.setOlid(o.getString("key").replace("/works/", ""));
         this.setTitle(o.getString("title"));
         if (o.containsKey("description")) {
             Object descriptionObject = o.get("description");

@@ -82,11 +82,11 @@ public class BookService {
         JsonArray booksJson = makeGetRequest(url).getJsonArray("docs");
         return booksJson.stream().map(v -> {
             JsonObject bookResult = (JsonObject) v;
-            String key = bookResult.getString("key");
+            String olid = bookResult.getString("key").replace("/works/", "");
             return new Book(
-                key.replace("/works/", ""),
+                olid,
                 bookResult.getString("title"),
-                OPENLIBRARY_BASE_URI + key
+                "/book/" + olid
             );
         }).collect(Collectors.toList());
     }
